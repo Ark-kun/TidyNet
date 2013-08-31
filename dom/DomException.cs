@@ -29,8 +29,10 @@ namespace TidyNet.Dom
 	/// corresponding method descriptions.
 	/// <p>See also the <a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113'>Document Object Model (DOM) Level 2 Core Specification</a>.
 	/// </summary>
+#if ! PORTABLE
 	[Serializable]
-	public class DomException : Exception
+#endif
+    public class DomException : Exception
 	{
 		/// <summary>If index or size is negative, or greater than the allowed value</summary>
 		public const short IndexSize = 1;

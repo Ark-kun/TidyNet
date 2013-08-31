@@ -1,7 +1,9 @@
 using System;
+#if ! PORTABLE
+using System.Configuration;
+#endif
 using System.IO;
 using System.Text;
-using System.Configuration;
 
 namespace TidyNet
 {
@@ -47,8 +49,8 @@ namespace TidyNet
 		{
 			int ch;
 			
-			try
-			{
+            //try
+            //{
 				if (Encoding == CharEncoding.UTF8)
 				{
 					if (c < 128)
@@ -139,33 +141,37 @@ namespace TidyNet
 				{
 					Output.WriteByte((byte) c);
 				}
-			}
-			catch (IOException e)
-			{
-				Console.Error.WriteLine("OutImpl.outc: " + e.ToString());
-			}
+            //}
+            //catch (IOException e)
+            //{
+            //    Console.Error.WriteLine("OutImpl.outc: " + e.ToString());
+            //}
 		}
 		
 		public override void Newline()
 		{
-			try
-			{
+            //try
+            //{
 				byte[] temp_sbyteArray;
 				temp_sbyteArray = nlBytes;
 				Output.Write(temp_sbyteArray, 0, temp_sbyteArray.Length);
 				Output.Flush();
-			}
-			catch (IOException e)
-			{
-				Console.Error.WriteLine("OutImpl.newline: " + e.ToString());
-			}
+            //}
+            //catch (IOException e)
+            //{
+            //    Console.Error.WriteLine("OutImpl.newline: " + e.ToString());
+            //}
 		}
 		
 		private static readonly byte[] nlBytes;
 
 		static OutImpl()
 		{
-			string lineSeparator = (string)ConfigurationSettings.AppSettings["line.separator"];
+
+            string lineSeparator = null;
+#if !PORTABLE
+			lineSeparator = (string)ConfigurationSettings.AppSettings["line.separator"];
+#endif
 			if (lineSeparator == null) lineSeparator = Environment.NewLine;
 			nlBytes = System.Text.Encoding.UTF8.GetBytes(lineSeparator);
 		}

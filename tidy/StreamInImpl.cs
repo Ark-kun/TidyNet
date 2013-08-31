@@ -56,8 +56,8 @@ namespace TidyNet
 		{
 			int n, c, i, count;
 			
-			try
-			{
+            //try
+            //{
 				c = stream.ReadByte();
 				if (c == EndOfStream)
 				{
@@ -194,12 +194,12 @@ namespace TidyNet
 					
 					n = (n << 6) | (c & 0x3F);
 				}
-			}
-			catch (IOException e)
-			{
-				Console.Error.WriteLine("StreamInImpl.readCharFromStream: " + e.ToString());
-				n = EndOfStream;
-			}
+			//}
+            //catch (IOException e)
+            //{
+            //    Console.Error.WriteLine("StreamInImpl.readCharFromStream: " + e.ToString());
+            //    n = EndOfStream;
+            //}
 			
 			return n;
 		}

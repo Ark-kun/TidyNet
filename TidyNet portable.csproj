@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C3536C71-B41A-4381-AF34-54E9DE34C49B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TidyNet</RootNamespace>
+    <AssemblyName>TidyNet</AssemblyName>
+    <AssemblyOriginatorKeyFile>TidyNet.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile88</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\portable-net40+sl4+win8+wp71\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\portable-net40+sl4+win8+wp71\Release\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="dom\DomException.cs" />
+    <Compile Include="dom\IAttr.cs" />
+    <Compile Include="dom\ICDATASection.cs" />
+    <Compile Include="dom\ICharacterData.cs" />
+    <Compile Include="dom\IComment.cs" />
+    <Compile Include="dom\IDocument.cs" />
+    <Compile Include="dom\IDocumentFragment.cs" />
+    <Compile Include="dom\IDocumentType.cs" />
+    <Compile Include="dom\IDomImplementation.cs" />
+    <Compile Include="dom\IElement.cs" />
+    <Compile Include="dom\IEntity.cs" />
+    <Compile Include="dom\IEntityReference.cs" />
+    <Compile Include="dom\INamedNodeMap.cs" />
+    <Compile Include="dom\INode.cs" />
+    <Compile Include="dom\INodeList.cs" />
+    <Compile Include="dom\INotation.cs" />
+    <Compile Include="dom\IProcessingInstruction.cs" />
+    <Compile Include="dom\IText.cs" />
+    <Compile Include="dom\NodeType.cs" />
+    <Compile Include="tidy\AlignAttrCheck.cs" />
+    <Compile Include="tidy\AnchorCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\AreaCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\AttrCheckImpl.cs" />
+    <Compile Include="tidy\Attribute.cs" />
+    <Compile Include="tidy\AttributeTable.cs" />
+    <Compile Include="tidy\AttVal.cs" />
+    <Compile Include="tidy\BoolAttrCheck.cs" />
+    <Compile Include="tidy\CaptionCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\CharEncoding.cs" />
+    <Compile Include="tidy\CheckAttribsImpl.cs" />
+    <Compile Include="tidy\Clean.cs" />
+    <Compile Include="tidy\ClsStreamInImpl.cs" />
+    <Compile Include="tidy\ContentModel.cs" />
+    <Compile Include="tidy\Dict.cs" />
+    <Compile Include="tidy\DocType.cs" />
+    <Compile Include="tidy\DomAttrImpl.cs" />
+    <Compile Include="tidy\DomAttrMapImpl.cs" />
+    <Compile Include="tidy\DomCdataSectionImpl.cs" />
+    <Compile Include="tidy\DomCharacterDataImpl.cs" />
+    <Compile Include="tidy\DomCommentImpl.cs" />
+    <Compile Include="tidy\DomDocumentImpl.cs" />
+    <Compile Include="tidy\DomDocumentTypeImpl.cs" />
+    <Compile Include="tidy\DomElementImpl.cs" />
+    <Compile Include="tidy\DomNodeImpl.cs" />
+    <Compile Include="tidy\DomNodeListByTagNameImpl.cs" />
+    <Compile Include="tidy\DomNodeListImpl.cs" />
+    <Compile Include="tidy\DomProcessingInstructionImpl.cs" />
+    <Compile Include="tidy\DomTextImpl.cs" />
+    <Compile Include="tidy\Entity.cs" />
+    <Compile Include="tidy\EntityTable.cs" />
+    <Compile Include="tidy\HrCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\HtmlCheckAttribs.cs" />
+    <Compile Include="tidy\HtmlVersion.cs" />
+    <Compile Include="tidy\IAttrCheck.cs" />
+    <Compile Include="tidy\ICheckAttribs.cs" />
+    <Compile Include="tidy\IdAttrCheck.cs" />
+    <Compile Include="tidy\ImgCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\InlineStack.cs" />
+    <Compile Include="tidy\IParser.cs" />
+    <Compile Include="tidy\Lexer.cs" />
+    <Compile Include="tidy\LinkCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\MapCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\MessageLevel.cs" />
+    <Compile Include="tidy\MutableBoolean.cs" />
+    <Compile Include="tidy\MutableInteger.cs" />
+    <Compile Include="tidy\MutableObject.cs" />
+    <Compile Include="tidy\NameAttrCheck.cs" />
+    <Compile Include="tidy\Node.cs" />
+    <Compile Include="tidy\Out.cs" />
+    <Compile Include="tidy\OutImpl.cs" />
+    <Compile Include="tidy\ParserImpl.cs" />
+    <Compile Include="tidy\PPrint.cs" />
+    <Compile Include="tidy\Report.cs" />
+    <Compile Include="tidy\ScriptAttrCheck.cs" />
+    <Compile Include="tidy\ScriptCheckAttribs.cs" />
+    <Compile Include="tidy\StreamIn.cs" />
+    <Compile Include="tidy\StreamInImpl.cs" />
+    <Compile Include="tidy\Style.cs" />
+    <Compile Include="tidy\StyleCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\StyleProp.cs" />
+    <Compile Include="tidy\TableCellCheckTableCheckAttribs.cs" />
+    <Compile Include="tidy\TableCheckAttribs.cs" />
+    <Compile Include="tidy\TagTable.cs" />
+    <Compile Include="tidy\Tidy.cs" />
+    <Compile Include="tidy\TidyMessage.cs" />
+    <Compile Include="tidy\TidyMessageCollection.cs" />
+    <Compile Include="tidy\TidyOptions.cs" />
+    <Compile Include="tidy\UrlAttrCheck.cs" />
+    <Compile Include="tidy\ValignAttrCheck.cs" />
+    <EmbeddedResource Include="TidyMessages.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TidyNet.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

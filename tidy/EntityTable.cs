@@ -1,6 +1,7 @@
 using System;
 using TidyNet.Dom;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TidyNet
 {
@@ -138,8 +139,8 @@ namespace TidyNet
 				return _defaultEntityTable;
 			}
 		}
-		
-		private Hashtable _entityHashtable = new Hashtable();
+
+        private Dictionary<string, Entity> _entityHashtable = new Dictionary<string, Entity>();
 		
 		private static EntityTable _defaultEntityTable = null;
 		

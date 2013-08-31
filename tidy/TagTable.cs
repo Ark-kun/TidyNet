@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TidyNet
 {
@@ -264,7 +265,7 @@ namespace TidyNet
 
 
 		private TidyOptions _options = null;
-		private Hashtable _tagHashtable = new Hashtable();
+		private Dictionary<string, Dict> _tagHashtable = new Dictionary<string, Dict>();
 		private static Dict[] _tags = new Dict[]
 			{
 				new Dict("html", HtmlVersion.All | HtmlVersion.Frames, ContentModel.Html | ContentModel.Opt | ContentModel.OmitSt, ParserImpl.ParseHTML, CheckAttribsImpl.CheckHtml), 

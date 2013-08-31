@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TidyNet
 {
@@ -93,14 +94,14 @@ namespace TidyNet
 		/* Inline stack for compatibility with Mosaic */
 		public Node inode; /* for deferring text node */
 		public int insert; /* for inferring inline tags */
-		public Stack istack;
+        public Stack<InlineStack> istack;
 		public int istackbase; /* start of frame */
 		
 		public Style styles; /* used for cleaning up presentation markup */
 		
 		public TidyOptions Options = new TidyOptions();
 		protected internal int seenBodyEndTag; /* used by parser */
-		private ArrayList nodeList;
+        private List<Node> nodeList;
 		
 		public Lexer(StreamIn input, TidyOptions options)
 		{
@@ -128,12 +129,12 @@ namespace TidyNet
 			this.lexsize = 0;
 			this.inode = null;
 			this.insert = - 1;
-			this.istack = new Stack();
+            this.istack = new Stack<InlineStack>();
 			this.istackbase = 0;
 			this.styles = null;
 			this.Options = options;
 			this.seenBodyEndTag = 0;
-			this.nodeList = new ArrayList();
+            this.nodeList = new List<Node>();
 		}
 		
 		public virtual Node NewNode()
@@ -219,7 +220,7 @@ namespace TidyNet
 			}
 			catch (IOException e)
 			{
-				throw new ApplicationException("string to UTF-8 conversion failed: " + e.Message);
+                throw new Exception("string to UTF-8 conversion failed: " + e.Message, e);
 			}
 		}
 		
@@ -231,7 +232,7 @@ namespace TidyNet
 			}
 			catch (IOException e)
 			{
-				throw new ApplicationException("UTF-8 to string conversion failed: " + e.Message);
+                throw new Exception("UTF-8 to string conversion failed: " + e.Message, e);
 			}
 		}
 		

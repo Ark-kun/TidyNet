@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Configuration;
 using System.Collections;
 using TidyNet.Dom;
 
@@ -144,7 +143,9 @@ namespace TidyNet
 	/// <version>1.9, 2000/06/03 Tidy Release 30 Apr 2000</version>
 	/// <version>1.10, 2000/07/22 Tidy Release 8 Jul 2000</version>
 	/// <version>1.11, 2000/08/16 Tidy Release 4 Aug 2000</version>
+#if ! PORTABLE
 	[Serializable]
+#endif
 	public class Tidy
 	{
 		public Tidy()
@@ -191,7 +192,7 @@ namespace TidyNet
 		{
 			try
 			{
-				Parse(input, null, output, messages);
+				Parse(input, output, messages);
 			}
 			catch (FileNotFoundException)
 			{
@@ -201,54 +202,25 @@ namespace TidyNet
 			}
 		}
 
+        #if ! PORTABLE
 		/// <summary>
-		/// Parses the input stream or file and writes to the output.
+		/// Parses the file and writes to the output.
 		/// </summary>
-		/// <param name="input">The input stream</param>
 		/// <param name="file">The input file</param>
 		/// <param name="Output">The output stream</param>
 		/// <param name="messages">The messages</param>
-		public void Parse(Stream input, string file, Stream Output, TidyMessageCollection messages)
+		public void Parse(string file, Stream Output, TidyMessageCollection messages)
 		{
-			ParseInternal(input, file, Output, messages);
-		}
-
-		/// <summary> Parses InputStream in and returns the root Node.
-		/// If out is non-null, pretty prints to OutputStream out.
-		/// </summary>
-		internal virtual Node ParseInternal(Stream input, Stream output, TidyMessageCollection messages)
-		{
-			Node document = null;
-			
-			try
-			{
-				document = ParseInternal(input, null, output, messages);
-			}
-			catch (FileNotFoundException)
-			{
-			}
-			catch (IOException)
-			{
-			}
-			
-			return document;
+			ParseInternal(file, Output, messages);
 		}
 
 		/// <summary> Internal routine that actually does the parsing.  The caller
 		/// can pass either an InputStream or file name.  If both are passed,
 		/// the file name is preferred.
 		/// </summary>
-		internal Node ParseInternal(Stream input, string file, Stream Output, TidyMessageCollection messages)
+		internal Node ParseInternal(string file, Stream Output, TidyMessageCollection messages)
 		{
-			Lexer lexer;
-			Node document = null;
-			Node doctype;
-			Out o = new OutImpl(); /* normal output stream */
-			PPrint pprint;
-			
-			/* ensure config is self-consistent */
-			_options.Adjust();
-			
+            Stream input = null;
 			if (file != null)
 			{
 				input = new FileStream(file, FileMode.Open, FileAccess.Read);
@@ -257,6 +229,33 @@ namespace TidyNet
 			{
 				input = Console.OpenStandardInput();
 			}
+            Node node = ParseInternal(input, Output, messages);
+
+            // Try to close the InputStream but only if if we created it.
+
+            if ((file != null) && (input != Console.OpenStandardOutput())) { //BUG!!!
+                try {
+                    input.Close();
+                } catch (IOException) {
+                }
+            }
+            return node;
+        }
+#endif
+
+		/// <summary> Parses InputStream in and returns the root Node.
+		/// If out is non-null, pretty prints to OutputStream out.
+		/// </summary>
+        internal Node ParseInternal(Stream input, Stream Output, TidyMessageCollection messages)
+        {
+			Lexer lexer;
+			Node document = null;
+			Node doctype;
+			Out o = new OutImpl(); /* normal output stream */
+			PPrint pprint;
+			
+			/* ensure config is self-consistent */
+			_options.Adjust();
 			
 			if (input != null)
 			{
@@ -351,19 +350,6 @@ namespace TidyNet
 					}
 				}
 				
-				// Try to close the InputStream but only if if we created it.
-				
-				if ((file != null) && (input != Console.OpenStandardOutput()))
-				{
-					try
-					{
-						input.Close();
-					}
-					catch (IOException)
-					{
-					}
-				}
-				
 				if (lexer.messages.Errors > 0)
 				{
 					Report.NeedsAuthorIntervention(lexer);
@@ -374,7 +360,8 @@ namespace TidyNet
 				
 				if (lexer.messages.Errors == 0)
 				{
-					if (_options.BurstSlides)
+#if ! PORTABLE
+                    if (_options.BurstSlides)
 					{
 						Node body;
 						
@@ -418,7 +405,9 @@ namespace TidyNet
 							Report.MissingBody(lexer);
 						}
 					}
-					else if (Output != null)
+					else
+#endif
+                    if (Output != null)
 					{
 						pprint = new PPrint(_options);
 						o.Output = Output;

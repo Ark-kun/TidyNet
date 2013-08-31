@@ -1556,11 +1556,13 @@ namespace TidyNet
 						}
 					}
 					
+#if ! PORTABLE
 					if (node.Tag == tt.TagBody && _options.BurstSlides)
 					{
 						PrintSlide(fout, mode, (_options.IndentContent?indent + _options.Spaces:indent), lexer);
 					}
 					else
+#endif
 					{
 						last = null;
 						
@@ -1935,7 +1937,7 @@ namespace TidyNet
 				Node.InsertNodeAtStart(head, meta);
 			}
 		}
-		
+#if ! PORTABLE
 		public virtual void CreateSlides(Lexer lexer, Node root)
 		{
 			Node body;
@@ -1999,7 +2001,7 @@ namespace TidyNet
 				++slide;
 			}
 		}
-
+#endif
 		private const int NORMAL = 0;
 		private const int PREFORMATTED = 1;
 		private const int COMMENT = 2;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TidyNet
 {
@@ -232,7 +233,7 @@ namespace TidyNet
 				_breakBeforeBR = value;
 			}
 		}
-
+#if ! PORTABLE
 		/// <summary>Create slides on each h2 element</summary>
 		public virtual bool BurstSlides
 		{
@@ -245,7 +246,7 @@ namespace TidyNet
 				_burstSlides = value;
 			}
 		}
-
+#endif
 		/// <summary>Use numeric entities</summary>
 		public virtual bool NumEntities
 		{
@@ -712,7 +713,7 @@ namespace TidyNet
 		{
 			public Tokenizer(string source, string delimiters)
 			{
-				_elements = new ArrayList();
+				_elements = new List<string>();
 				_delimiters = delimiters;
 				_elements.AddRange(source.Split(_delimiters.ToCharArray()));
 				for (int index = 0; index < _elements.Count; index++)
@@ -740,7 +741,7 @@ namespace TidyNet
 				}
 				else
 				{
-					_elements = new ArrayList();
+                    _elements = new List<string>();
 					_elements.AddRange(_source.Split(_delimiters.ToCharArray()));
 					for (int index = 0; index < _elements.Count; index++)
 					{
@@ -758,7 +759,7 @@ namespace TidyNet
 				}			
 			}
 
-			private ArrayList _elements;
+            private List<string> _elements;
 			private string _source;
 			private string _delimiters = " \t\n\r";
 		}

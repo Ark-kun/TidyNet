@@ -654,7 +654,7 @@ namespace TidyNet
 			}
 			catch (MissingManifestResourceException e)
 			{
-				throw new ApplicationException(e.Message, e);
+				throw new Exception(e.Message, e);
 			}
 		}
 

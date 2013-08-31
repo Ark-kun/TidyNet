@@ -1,6 +1,7 @@
 using System;
 using TidyNet.Dom;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TidyNet
 {
@@ -301,8 +302,8 @@ namespace TidyNet
 		private static Attribute _attrDatafld = null;
 		private static Attribute _attrWidth = null;
 		private static Attribute _attrHeight = null;
-		
-		private Hashtable _attributeHashtable = new Hashtable();
+
+        private Dictionary<string, Attribute> _attributeHashtable = new Dictionary<string, Attribute>();
 		private static AttributeTable _defaultAttributeTable = null;
 		private static Attribute[] _attrs = new Attribute[] 
 			{

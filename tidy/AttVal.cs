@@ -28,7 +28,10 @@ namespace TidyNet
 	/// <version>1.9, 2000/06/03 Tidy Release 30 Apr 2000</version>
 	/// <version>1.10, 2000/07/22 Tidy Release 8 Jul 2000</version>
 	/// <version>1.11, 2000/08/16 Tidy Release 4 Aug 2000</version>
-	internal class AttVal : ICloneable
+	internal class AttVal
+#if ! PORTABLE
+        : ICloneable
+#endif
 	{
 		public AttVal()
 		{

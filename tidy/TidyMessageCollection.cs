@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TidyNet
 {
 	/// <summary>
 	/// Collection of TidyMessages
 	/// </summary>
+#if ! PORTABLE
 	[Serializable]
-	public class TidyMessageCollection : CollectionBase
+#endif
+	public class TidyMessageCollection
 	{
+        List<TidyMessage> _errorList = new List<TidyMessage>();
+
 		/// <summary>
 		/// Public default constructor
 		/// </summary>
@@ -31,7 +36,7 @@ namespace TidyNet
 				_warnings++;
 			}
 
-			InnerList.Add(message);
+            _errorList.Add(message);
 		}
 
 		/// <summary> Errors - the number of errors that occurred in the most
